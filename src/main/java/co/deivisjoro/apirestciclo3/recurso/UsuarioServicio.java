@@ -6,6 +6,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Date;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,13 +23,15 @@ public class UsuarioServicio {
 	
 	Conexion conexion = new Conexion();    
     UsuarioDAO usuarioDAO = new UsuarioDAO(conexion);
-          
+    
+    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Usuario> setUsuario(@RequestBody Usuario usuario){
 		Usuario newUsuario = usuarioDAO.addUsuario(usuario);	
 		return ResponseEntity.ok(newUsuario);
 	}
     
+    @CrossOrigin(origins = "http://localhost:4200", methods = RequestMethod.POST)
     @RequestMapping(value = "login", method = RequestMethod.POST)
 	public ResponseEntity<Usuario> checkLogin(@RequestBody Usuario usuario){
     	Usuario u = usuarioDAO.checkLogin(usuario);
@@ -43,7 +46,7 @@ public class UsuarioServicio {
 	                    .setExpiration(new Date(tiempo + 900000))
 	                    .claim("username", u.getUsername())
 	                    .claim("correo", u.getCorreo())
-	                    .compact();;
+	                    .compact();
 	    }
         
 	    u.setHash(hash);
