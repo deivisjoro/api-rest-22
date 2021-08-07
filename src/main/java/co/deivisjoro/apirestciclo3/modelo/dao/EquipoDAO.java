@@ -33,9 +33,8 @@ public class EquipoDAO {
                 equipos.add(equipo);
 
             }
-            rs.close();
-            pst.close();
         } catch (SQLException ex) {
+        	System.out.println("Error: "+ex.getMessage());
         }        
         return equipos;    
     }
@@ -63,10 +62,10 @@ public class EquipoDAO {
                 }
             }        
 
-            rs.close();
-            pst.close();
+            
         }
         catch(SQLException e){
+        	System.out.println("Error: "+e.getMessage());
         }
         
         return equipo;
@@ -79,14 +78,13 @@ public class EquipoDAO {
             pst.setString(1, equipo.getNombre());
             pst.setInt(2, equipo.getId());
             int result = pst.executeUpdate();
-            pst.close();
 
             if(result>0){
                 return true;
             }
         }
         catch(SQLException e){
-        
+        	System.out.println("Error: "+e.getMessage());        
         }        
         return false;
     }
@@ -97,13 +95,12 @@ public class EquipoDAO {
             PreparedStatement pst = this.connection.prepareStatement(sql);
             pst.setInt(1, id);
             int result = pst.executeUpdate();
-            pst.close();
-
             if(result>0){
                 return true;
             }
         }
         catch(SQLException e){
+        	System.out.println("Error: "+e.getMessage());
         }
         
         return false;

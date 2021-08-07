@@ -36,9 +36,9 @@ public class UsuarioDAO {
                 usuarios.add(usuario);
 
             }
-            rs.close();
-            pst.close();
+            
         } catch (SQLException ex) {
+        	System.out.println("Error: "+ex.getMessage());
         }        
         return usuarios;    
     }
@@ -69,11 +69,10 @@ public class UsuarioDAO {
                 }
             }        
 
-            rs.close();
-            pst.close();
         }
         catch(SQLException e){
         	//e.printStackTrace();
+        	System.out.println("Error: "+e.getMessage());
         }
         
         return usuario;
@@ -89,13 +88,14 @@ public class UsuarioDAO {
             pst.setString(4, usuario.getPassword());
             pst.setInt(5, usuario.getId());
             int result = pst.executeUpdate();
-            pst.close();
+          
 
             if(result>0){
                 return true;
             }
         }
         catch(SQLException e){
+        	System.out.println("Error: "+e.getMessage());
         
         }        
         return false;
@@ -107,13 +107,13 @@ public class UsuarioDAO {
             PreparedStatement pst = this.connection.prepareStatement(sql);
             pst.setInt(1, id);
             int result = pst.executeUpdate();
-            pst.close();
 
             if(result>0){
                 return true;
             }
         }
         catch(SQLException e){
+        	System.out.println("Error: "+e.getMessage());
         }
         
         return false;
@@ -137,9 +137,8 @@ public class UsuarioDAO {
                 result = usuario;
 
             }
-            rs.close();
-            pst.close();
         } catch (SQLException ex) {
+        	System.out.println("Error: "+ex.getMessage());
         }        
         return result;    
     }

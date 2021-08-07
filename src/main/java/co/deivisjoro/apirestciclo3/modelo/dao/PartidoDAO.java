@@ -40,8 +40,7 @@ public class PartidoDAO {
                 partidos.add(partido);
 
             }
-            rs.close();
-            pst.close();
+            
         } catch (SQLException ex) {
             System.out.println("Error: "+ex.getMessage());
         }        
@@ -77,10 +76,10 @@ public class PartidoDAO {
                 }
             }        
 
-            rs.close();
-            pst.close();
+           
         }
         catch(SQLException e){
+        	System.out.println("Error: "+e.getMessage());
         }
         
         return partido;
@@ -99,13 +98,14 @@ public class PartidoDAO {
             pst.setInt(6, partido.getGolesVisitante());
             pst.setInt(7, partido.getId());
             int result = pst.executeUpdate();
-            pst.close();
+          
 
             if(result>0){
                 return partido;
             }
         }
         catch(SQLException e){
+        	System.out.println("Error: "+e.getMessage());
         
         }        
         return p;
@@ -117,13 +117,14 @@ public class PartidoDAO {
             PreparedStatement pst = this.connection.prepareStatement(sql);
             pst.setInt(1, id);
             int result = pst.executeUpdate();
-            pst.close();
+          
 
             if(result>0){
                 return true;
             }
         }
         catch(SQLException e){
+        	System.out.println("Error: "+e.getMessage());
         }
         
         return false;
