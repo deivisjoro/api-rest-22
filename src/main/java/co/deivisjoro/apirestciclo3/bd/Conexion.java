@@ -5,18 +5,20 @@ import java.sql.DriverManager;
 
 public class Conexion {
 
-    private Connection conexion;
+    public static Connection conexion;
 
     public Conexion() {
-        this.conexion = null;
+        conexion = null;
     }
 
     public Connection getConexion(){
       
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            //this.conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/ciclo3unab", "root", "");
-            this.conexion = DriverManager.getConnection("jdbc:mysql://ba063f7c4753f9:75f18016@eu-cdbr-west-01.cleardb.com/heroku_854d9842dabc2a5?reconnect=true&useSSL=false");
+        	if(conexion==null || conexion.isClosed()) {
+        		Class.forName("com.mysql.cj.jdbc.Driver");
+        		//conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/ciclo3unab", "root", "");
+        		conexion = DriverManager.getConnection("jdbc:mysql://ba063f7c4753f9:75f18016@eu-cdbr-west-01.cleardb.com/heroku_854d9842dabc2a5?reconnect=true&useSSL=false");
+        	}		
         } catch (Exception ex) {
             System.out.println("Error: "+ex.getMessage());
             
