@@ -15,7 +15,10 @@ public class EquipoDAO {
     private Connection connection;
     
     public EquipoDAO(Conexion conexion){  
-        this.connection = conexion.getConexion();        
+        this.connection = conexion.getConexion();    
+        if(this.connection==null){
+        	this.connection = (Connection) new Conexion(); 
+        }
     }
         
     public ArrayList<Equipo> getEquipos(){

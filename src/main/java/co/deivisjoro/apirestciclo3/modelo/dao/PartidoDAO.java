@@ -15,7 +15,10 @@ public class PartidoDAO {
     private Connection connection;
     
     public PartidoDAO(Conexion conexion){  
-        this.connection = conexion.getConexion();        
+        this.connection = conexion.getConexion();    
+        if(this.connection==null){
+        	this.connection = (Connection) new Conexion(); 
+        }
     }
      
     public ArrayList<Partido> getPartidos(){
